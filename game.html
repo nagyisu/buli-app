@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2 id="info"></h2>
+
+<button onclick="question()">🎲 Kérdés</button>
+<button onclick="drink()">🍺 Iszom</button>
+<button onclick="skip()">⏭ Skip</button>
+<button onclick="boss()">🔥 Boss</button>
+
+<div id="question"></div>
+
+<h3>🏆 Leaderboard</h3>
+<div id="board"></div>
+
+<!-- BOSS -->
+<div id="boss" class="popup">
+  <h1>🔥 BOSS KÖR</h1>
+  <p id="bossText"></p>
+  <button onclick="closeBoss()">OK</button>
+</div>
+
+<!-- KORONA -->
+<div id="king" class="popup">
+  <div class="crown">👑</div>
+  <div id="kingName"></div>
+  <button onclick="closeKing()">Bezár</button>
+</div>
+
+<script>
+let name = localStorage.getItem("name");
+let table = localStorage.getItem("table");
+
+document.getElementById("info").innerText =
+  name + " | Asztal " + table;
+
+const bossList = [
+  "Mindenki iszik 1-et",
+  "Válassz valakit → iszik 3-at",
+  "Bal oldalad iszik",
+  "Jobb oldalad iszik"
+];
+
+function question(){
+  let q = [
+    "Mi volt a legcikibb pillanatod?",
+    "Kire bíznál rá 1 milliót?",
+    "Kit hívnál fel részegen?",
+    "Mi volt a legrosszabb randid?"
+  ];
+
+  document.getElementById("question").innerText =
+    q[Math.floor(Math.random()*q.length)];
+}
+
+function drink(){
+  alert("🍺 +1 ital");
+}
+
+function skip(){
+  alert("⏭ kihagyva");
+}
+
+function boss(){
+  let b = bossList[Math.floor(Math.random()*bossList.length)];
+  document.getElementById("bossText").innerText = b;
+  document.getElementById("boss").style.display="flex";
+}
+
+function closeBoss(){
+  document.getElementById("boss").style.display="none";
+}
+
+function showKing(){
+  document.getElementById("kingName").innerText =
+    name + " 👑 BULI KIRÁLY";
+
+  document.getElementById("king").style.display="flex";
+}
+
+function closeKing(){
+  document.getElementById("king").style.display="none";
+}
+</script>
+
+</body>
+</html>
